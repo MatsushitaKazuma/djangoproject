@@ -1,164 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="{% static 'testapp/style.css' %}">
-        <title>ハンバーガーメニューのテスト</title>
-    </head>
-    <body>
-
-        <h1>Accordion Menu</h1>
-        <hr color="#dddddd">
-
-<div class="accordion-container">
-
-  <!-- メニュー１ -->
-  <div class="accordion">
-    <!-- メニューボタン -->
-     
-    <button class="menu-button">プラン<span class="icon">&plus;</span></button>
-    <!-- コンテンツ -->
-    <div class="content">
-        <input type="checkbox" id="checksAll">全選択</input>
-        <input type="checkbox" class="checks">センス</input>
-        <input type="checkbox" class="checks">ロジック</input>
-        <input type="checkbox" class="checks">アノマリー</input>
-        <input type="checkbox" class="checks">制限なし</input>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>ToDoリスト</title>
+  <link rel="stylesheet" href="{% static 'testapp/style.css' %}" />
+</head>
+<body>
+  <div class="todo-container">
+    <h1>ToDoリスト</h1>
+    <form class="todo-form">
+      <input type="text" class="todo-input" placeholder="やることを入力..." required />
+      <button type="submit" class="add-button">追加</button>
+    </form>
+    <ul class="todo-list" id="todo-list"></ul>
   </div>
 
-  <!-- メニュー２ -->
-  <div class="accordion">
-    <!-- メニューボタン -->
-    <button class="menu-button">パラメータ<span class="icon">&plus;</span></button>
-    <!-- コンテンツ -->
-    <div class="content">
-        <input type="checkbox" id="checksAll2">全選択</input>
-        <input type="checkbox" class="checks2">ボーカル</input>
-        <input type="checkbox" class="checks2">ダンス</input>
-        <input type="checkbox" class="checks2">ビジュアル</input>
-        <input type="checkbox" class="checks2">回復</input>
-    </div>
-  </div>
-
-  <!-- メニュー３ -->
-  <div class="accordion">
-    <!-- メニューボタン -->
-    <button class="menu-button">サポカスキル<span class="icon">&plus;</span></button>
-    <!-- コンテンツ -->
-    <div class="content">
-        <input type="radio" id="checksAll2" name="radio">AND検索</input>
-        <input type="radio" class="checks2" name="radio">OR検索</input>
-        <hr>
-        <input type="checkbox" id="checksAll2">授業・営業終了時</input>
-        <input type="checkbox" class="checks2">おでかけ終了時</input>
-        <input type="checkbox" class="checks2">スキルカード強化時</input>
-        <input type="checkbox" class="checks2">相談選択時</input>
-        <input type="checkbox" class="checks2">活動支給・差し入れ選択時</input><br>
-        <input type="checkbox" class="checks2">レッスン終了時</input>
-        <input type="checkbox" class="checks2">SPレッスン終了時</input>
-        <hr>
-        <input type="checkbox" class="checks2">パラメータ上昇</input>
-        <input type="checkbox" class="checks2">体力回復</input>
-        <input type="checkbox" class="checks2">Pドリンク取得</input><br>
-        <input type="checkbox" class="checks2">スキルカード強化</input>
-        <input type="checkbox" class="checks2">眠気削除</input>
-        
-        <hr>
-        <input type="checkbox" class="checks2">初期パラメータ上昇</input>
-        <input type="checkbox" class="checks2">SPレッスン発生率上昇</input><br>
-        <input type="checkbox" class="checks2">レッスンボーナス</input>
-
-    </div>
-  </div>
-
-    <!-- メニュー４ -->
-    <div class="accordion">
-        <!-- メニューボタン -->
-        <button class="menu-button">サポカイベント<span class="icon">&plus;</span></button>
-        <!-- コンテンツ -->
-        <div class="content">
-            <form action="./test.html" name="search" id="search" class="search">
-            <input type="radio" class="checks2" name="radio2">Pアイテム</input>
-            <input type="radio" class="checks2" name="radio2">スキルカード</input><br>
-            <hr>
-            <input type="checkbox" class="checks2">パラメータ上昇</input>
-            <input type="checkbox" class="checks2">スキルカード強化</input>
-            <input type="checkbox" class="checks2">スキルチェンジ</input>
-            </form>
-            
-        </div>
-      </div>
-
-</div>
-<form action="./test.html" name="search" id="search" class="search">
-<div class="content-opened">
-    <input type="submit" value="検索" class="search-button"></input>
-</div>
-</form>
-
-    <script>
-        const menuBtns = document.querySelectorAll('.menu-button');
-
-        menuBtns.forEach(menuBtn => {
-        menuBtn.addEventListener('click', function() {
-        this.classList.toggle('open');
-        const content = this.nextElementSibling;
-        if (this.classList.contains('open')) {
-        content.style.height = content.scrollHeight + 'px';
-        } else {
-
-        // コンテンツを閉じる
-        content.style.height = 0;
-
-            }
-        });
-        });
-
-        const checkall = document.getElementById("checksAll");
-        const checks = document.querySelectorAll(".checks");
-        // 全て選択のチェックボックスがクリックされた時
-        checkall.addEventListener('click', () => {
-        for (val of checks) {
-            checkall.checked == true ? val.checked = true : val.checked = false;
-        }
-        });
-        // 個別のチェックボックスがクリックされた時
-        checks.forEach(element => {
-        element.addEventListener('click', () => {
-            // チェックが1つでも外された時
-            if (element.checked == false) {
-            checkall.checked = false;
-            }
-            // 全てにチェックがされた時
-            if (document.querySelectorAll(".checks:checked").length == checks.length) {
-            checkall.checked = true;
-            }
-        });
-        });
-
-        const checkall2 = document.getElementById("checksAll2");
-        const checks2 = document.querySelectorAll(".checks2");
-        // 全て選択のチェックボックスがクリックされた時
-        checkall2.addEventListener('click', () => {
-        for (val of checks2) {
-            checkall2.checked == true ? val.checked = true : val.checked = false;
-        }
-        });
-        // 個別のチェックボックスがクリックされた時
-        checks2.forEach(element => {
-        element.addEventListener('click', () => {
-            // チェックが1つでも外された時
-            if (element.checked == false) {
-            checkall2.checked = false;
-            }
-            // 全てにチェックがされた時
-            if (document.querySelectorAll(".checks2:checked").length == checks2.length) {
-            checkall2.checked = true;
-            }
-        });
-        });
-    </script>
-    </body>
+  <script src="{% static 'testapp/script.js' %}"></script>
+</body>
 </html>
